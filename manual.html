@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual & FAQs — Webbit</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+ 
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#fcfaf6',
+                        dark: '#211f1e',
+                        highlight: '#ffb3c6',
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fcfaf6;
+            color: #211f1e;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="w-full px-4 sm:px-8 py-4 sm:py-6 flex flex-wrap justify-between items-center gap-4 z-50">
+        <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
+            <img src="images/logo.png" alt="Webbit" class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg shadow-sm">
+            <span class="text-lg sm:text-xl font-medium tracking-tight">Webbit</span>
+        </a>
+        
+        <div class="flex items-center space-x-4 sm:space-x-6">
+            <a href="index.html" class="text-sm font-bold text-gray-500 hover:text-gray-900 transition">Home</a>
+            <a href="WebbitReminderSetup 1.0.0.exe" download="WebbitReminderSetup 1.0.0.exe"
+               onclick="va('event', 'Download Clicked - Windows');"
+               class="flex items-center bg-gray-100 hover:bg-gray-200 transition text-dark text-sm font-bold px-4 py-2 rounded-full">
+                Download for Windows
+            </a>
+        </div>
+    </header>
+
+    <!-- Manual Content -->
+    <main class="flex-grow w-full max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-[800] tracking-tight text-[#2c2b29] mb-8 sm:mb-12">Manual & FAQs</h1>
+        
+        <div class="space-y-10 sm:space-y-12">
+            <!-- How to Use -->
+            <section>
+                <h2 class="text-xl sm:text-2xl font-[800] text-[#2c2b29] mb-4">How it works</h2>
+                <div class="space-y-4 text-gray-600 text-base sm:text-[1.05rem] leading-relaxed">
+                    <p><strong class="text-gray-800">1. Setup:</strong> Open the app from your Windows system tray (bottom right corner).</p>
+                    <p><strong class="text-gray-800">2. Set the Time:</strong> Type your reminder text and pick the exact time you want it to trigger.</p>
+                    <p><strong class="text-gray-800">3. The Drop:</strong> At the set time, Spiderman will physically drop down from the top of your screen to deliver the message.</p>
+                </div>
+            </section>
+
+            <!-- Installation -->
+            <section>
+                <h2 class="text-xl sm:text-2xl font-[800] text-[#2c2b29] mb-4">Installing on Windows</h2>
+                <div class="space-y-4 text-gray-600 text-base sm:text-[1.05rem] leading-relaxed">
+                    <p><strong class="text-gray-800">1.</strong> Download <code class="bg-gray-200 px-1.5 py-0.5 rounded text-sm break-all">WebbitReminderSetup 1.0.0.exe</code> and run it.</p>
+                    <p><strong class="text-gray-800">2.</strong> If SmartScreen appears, click <strong>More info</strong>, then <strong>Run anyway</strong>.</p>
+                    <p><strong class="text-gray-800">3.</strong> Follow the setup wizard — Webbit will appear in your system tray once installed.</p>
+                </div>
+            </section>
+
+            <!-- FAQs -->
+            <section>
+                <h2 class="text-xl sm:text-2xl font-[800] text-[#2c2b29] mb-6">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-[#2c2b29] mb-1">Is it completely free?</h3>
+                        <p class="text-gray-600 text-base sm:text-[1.05rem]">Yes! Webbit is 100% free forever with no hidden costs or ads.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-[#2c2b29] mb-1">Does it work on Windows?</h3>
+                        <p class="text-gray-600 text-base sm:text-[1.05rem]">Yes — Webbit runs on Windows 10 and above.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-[#2c2b29] mb-1">Can I set recurring reminders?</h3>
+                        <p class="text-gray-600 text-base sm:text-[1.05rem]">Yes, you can configure it to repeat daily from the tray settings.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer with Socials -->
+    <footer class="w-full flex flex-col items-center justify-center space-y-6 pt-12 sm:pt-16 pb-16 sm:pb-20 px-4 bg-[#fcfaf6]">
+        <p class="text-2xl sm:text-3xl md:text-4xl font-[800] tracking-tight text-[#2c2b29] text-center">Let me know your feedback</p>
+        <div class="flex space-x-6 sm:space-x-8">
+            <a href="mailto:jayeshvishwakarma6028@gmail.com" class="text-[#2c2b29] hover:text-black transition transform hover:scale-110">
+                <svg class="w-8 h-8 sm:w-9 sm:h-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://www.instagram.com/jeyy.sh/" target="_blank" class="text-[#2c2b29] hover:text-black transition transform hover:scale-110">
+                <svg class="w-8 h-8 sm:w-9 sm:h-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.youtube.com/@Jey_Script" target="_blank" class="text-[#2c2b29] hover:text-black transition transform hover:scale-110">
+                <svg class="w-8 h-8 sm:w-9 sm:h-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>

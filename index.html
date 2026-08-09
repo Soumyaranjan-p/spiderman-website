@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webbit — Simple Desktop Reminders</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#fcfaf6',
+                        dark: '#1c1a18',
+                        spidey: '#dc2626',
+                        winblue: '#2563eb',
+                    },
+                    fontFamily: {
+                        display: ['"Archivo Black"', 'sans-serif'],
+                        sans: ['"Space Grotesk"', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fcfaf6;
+            color: #1c1a18;
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Halftone burst behind the headline */
+        .halftone {
+            position: absolute;
+            inset: -40px -20px auto -20px;
+            height: 480px;
+            background-image: radial-gradient(#dc2626 2.5px, transparent 2.5px);
+            background-size: 16px 16px;
+            opacity: 0.10;
+            z-index: -1;
+            mask-image: radial-gradient(ellipse 60% 55% at 50% 40%, black 40%, transparent 80%);
+        }
+
+        .speech-tag {
+            display: inline-flex;
+            align-items: center;
+            background: #dc2626;
+            color: white;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            padding: 0.35rem 0.7rem;
+            border-radius: 4px;
+            transform: rotate(-4deg);
+            position: relative;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+        }
+        .speech-tag::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 16px;
+            width: 0; height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #dc2626;
+        }
+
+        .comic-outline {
+            -webkit-text-stroke: 1.5px #1c1a18;
+        }
+
+        /* Windows-chrome app mockup */
+        .win-window {
+            width: 380px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .win-titlebar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 0 0 12px;
+            height: 36px;
+            background: #232323;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .win-titlebar .title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+        }
+        .win-controls { display: flex; height: 100%; }
+        .win-controls button {
+            width: 44px;
+            height: 100%;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+        }
+        .win-controls button.close:hover { background: #e81123; color: #fff; }
+        .win-controls button:not(.close):hover { background: rgba(255,255,255,0.08); }
+
+        .mockup-stage {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px 80px;
+            background: radial-gradient(circle at 50% 30%, #1a1a1a, #0a0a0a);
+        }
+        .mockup-image {
+    width: 700px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="w-full px-8 py-6 flex justify-between items-center z-50 relative">
+        <div class="flex items-center space-x-3">
+            <svg class="w-9 h-9 text-spidey" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="24" cy="24" r="23" fill="#dc2626"/>
+                <path d="M24 3v42M24 3 12 24l12 21M24 3l12 21-12 21M3 24h42M3 24l21-9-9 9 9 9-21-9M45 24l-21-9 9 9-9 9 21-9" stroke="#1c1a18" stroke-width="1.3" stroke-linejoin="round"/>
+                <circle cx="24" cy="24" r="23" stroke="#1c1a18" stroke-width="1.5"/>
+            </svg>
+            <span class="text-xl font-bold tracking-tight">Webbit</span>
+        </div>
+
+        <div class="flex items-center space-x-6">
+            <a href="manual.html" class="text-[0.95rem] font-bold text-[#1c1a18] hover:text-black transition">Manual & FAQs</a>
+
+            <a href="WebbitReminderSetup 1.0.0.exe" download="WebbitReminderSetup 1.0.0.exe"
+               onclick="va('event', 'Download Clicked - Windows');"
+               class="flex items-center bg-winblue hover:bg-blue-700 transition text-white text-sm font-bold px-4 py-2 rounded-full">
+                <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.1 10.2 4v7.3H3V5.1Zm0 13.8 7.2 1.1v-7.2H3v6.1ZM11 4.9V11.3H21V3.5L11 4.9Zm0 8.4v7.3l10 1.5v-8.8H11Z"/></svg>
+                Download
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <main class="w-full flex flex-col items-center text-center mt-10 sm:mt-14 px-6 relative">
+        <div class="halftone"></div>
+
+        <span class="speech-tag mb-6">DANGER: MAY CAUSE ACTUAL PRODUCTIVITY 🕷️</span>
+
+        <h1 class="font-display text-5xl sm:text-7xl leading-[1.05] tracking-[-0.02em] text-[#1c1a18] mb-8 max-w-4xl comic-outline">
+            Simple Desktop<br/>
+            <span class="text-spidey">Reminders.</span>
+        </h1>
+
+        <p class="text-gray-600 text-lg font-medium mb-8 max-w-md">Set a time. Type a message. Spidey drops in to remind you — right on your desktop.</p>
+
+        <div class="flex items-center space-x-4 mb-4">
+            <a id="main-cta" href="WebbitReminderSetup 1.0.0.exe" download="WebbitReminderSetup 1.0.0.exe"
+               onclick="va('event', 'Download Clicked - Windows');"
+               class="flex items-center bg-winblue hover:bg-blue-700 shadow-xl text-white text-lg font-bold px-6 py-3.5 rounded-xl transition transform hover:scale-[1.02]">
+                <svg id="main-cta-icon" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.1 10.2 4v7.3H3V5.1Zm0 13.8 7.2 1.1v-7.2H3v6.1ZM11 4.9V11.3H21V3.5L11 4.9Zm0 8.4v7.3l10 1.5v-8.8H11Z"/></svg>
+                <span id="main-cta-text">Download for Windows</span>
+            </a>
+
+            <div class="flex items-center bg-gray-100 px-4 py-3.5 rounded-xl">
+                <span class="text-sm font-bold text-gray-800 mr-3">100% Free</span>
+                <span class="bg-gray-700 text-white text-xs font-bold px-2 py-0.5 rounded">v1.0</span>
+            </div>
+        </div>
+
+        <span id="built-for-text" class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Built for Windows 10+</span>
+    </main>
+
+    <!-- App mockup: Windows window chrome -->
+    <div class="mockup-stage">
+    <img
+        src="testingimage.png"
+        alt="Webbit Reminder"
+        class="mockup-image"
+    >
+</div>
+
+    <!-- How to Use -->
+    <section class="w-full flex flex-col items-center justify-center pt-20 pb-20 px-6 relative">
+        <h2 class="font-display text-3xl sm:text-4xl text-[#1c1a18] mb-14 text-center">How to use it</h2>
+        <div class="flex flex-col sm:flex-row max-w-4xl w-full gap-12 sm:gap-6 justify-between items-start">
+            <div class="flex flex-col items-center text-center flex-1">
+                <div class="w-12 h-12 rounded-xl bg-[#1c1a18] text-white flex items-center justify-center text-lg font-bold mb-5">1</div>
+                <h3 class="text-lg font-bold text-[#1c1a18] mb-2">Install App</h3>
+                <p class="text-gray-500 text-sm font-medium leading-relaxed max-w-[220px]">Download the free .exe and run the setup wizard.</p>
+            </div>
+            <div class="flex flex-col items-center text-center flex-1">
+                <div class="w-12 h-12 rounded-xl bg-[#1c1a18] text-white flex items-center justify-center text-lg font-bold mb-5">2</div>
+                <h3 class="text-lg font-bold text-[#1c1a18] mb-2">Set Reminder</h3>
+                <p class="text-gray-500 text-sm font-medium leading-relaxed max-w-[220px]">Type your message and set the exact time.</p>
+            </div>
+            <div class="flex flex-col items-center text-center flex-1">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-b from-red-500 to-red-700 text-white flex items-center justify-center text-lg font-bold mb-5">3</div>
+                <h3 class="text-lg font-bold text-[#1c1a18] mb-2">Stay on Track</h3>
+                <p class="text-gray-500 text-sm font-medium leading-relaxed max-w-[220px]">Webbit drops onto your screen right on time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Windows security note -->
+  
+
+    <!-- Footer -->
+    <footer class="w-full flex flex-col items-center justify-center space-y-6 pt-10 pb-20 bg-[#fcfaf6]">
+        <p class="font-display text-2xl sm:text-3xl text-[#1c1a18]">Let me know your feedback</p>
+        <div class="flex space-x-8">
+            <a href="https://x.com/saroz_ai" target="_blank" class="text-[#1c1a18] hover:text-black transition transform hover:scale-110" aria-label="X (Twitter)">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231ZM17.083 19.77h1.833L7.084 4.126H5.117Z"/></svg>
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>
